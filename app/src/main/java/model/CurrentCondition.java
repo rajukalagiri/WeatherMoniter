@@ -13,7 +13,7 @@ public class CurrentCondition {
     private float humidity;
     private float maxTemp;
     private float minTemp;
-    private double temperature;
+    private int temperature;
 
     public int getWeatherId() {
         return weatherId;
@@ -79,11 +79,12 @@ public class CurrentCondition {
         this.minTemp = minTemp;
     }
 
-    public double getTemperature() {
+    public int getTemperature() {
+
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
 
