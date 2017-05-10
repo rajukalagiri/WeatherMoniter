@@ -4,9 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     Weather weather =new Weather();
     Timeformot timeformot=new Timeformot();
-        @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +60,11 @@ public class MainActivity extends AppCompatActivity {
         renderWeatherData(cityPreferences.getCityName());
 
     }
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public  void renderWeatherData(String city){
         WeatherTask weatherTask=new WeatherTask();
        weatherTask.execute((new String[]{city}));
 
     }
-   @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
    private  class WeatherTask extends AsyncTask<String, Void, Weather> {
 
 
@@ -95,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
            }
            return weather;
        }
-       @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
        @Override
        protected void onPostExecute(Weather weather) {
            super.onPostExecute(weather);
@@ -119,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         cityInput.setInputType(InputType.TYPE_CLASS_TEXT);
         cityInput.setHint("Raikal,India");
         builder.setView(cityInput);
+
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -133,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-            return super.onCreateOptionsMenu(menu);
+            return true;
         }
 
     @Override
