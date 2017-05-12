@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -106,24 +107,26 @@ public class MainActivity extends AppCompatActivity {
            iconView.setImageBitmap(bmp);
        }
 
-   }private  void showInputDialog(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("change city");
-        final EditText cityInput=new EditText(MainActivity.this);
-        cityInput.setInputType(InputType.TYPE_CLASS_TEXT);
-        cityInput.setHint("Raikal,India");
-        builder.setView(cityInput);
-
-        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CityPreferences cityPreferences=new CityPreferences(MainActivity.this);
-                cityPreferences.setCityName(cityInput.getText().toString());
-                String newCity=cityPreferences.getCityName();
-                renderWeatherData(newCity);
-            }
-        });
-
+   }
+   private  void showInputDialog(){
+       AlertDialog.Builder builder = new AlertDialog.Builder(
+               MainActivity.this);
+       builder.setTitle("change city");
+       final EditText cityInput=new EditText(MainActivity.this);
+       cityInput.setInputType(InputType.TYPE_CLASS_TEXT);
+       cityInput.setHint("Raikal,India");
+       builder.setView(cityInput);
+       builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+           public void onClick(DialogInterface dialog, int which) {
+               CityPreferences cityPreferences=new CityPreferences(MainActivity.this);
+               cityPreferences.setCityName(cityInput.getText().toString());
+               String newCity=cityPreferences.getCityName();
+               renderWeatherData(newCity);
+               //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+           }
+       });
+       AlertDialog alertDialogMain = builder.create();
+       alertDialogMain.show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
-        if(id==R.id.change_cityId){
+        if(id==R.id.location){
            showInputDialog();
         }
         return super.onOptionsItemSelected(item);
