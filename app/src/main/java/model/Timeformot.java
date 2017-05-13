@@ -13,7 +13,7 @@ public class Timeformot {
     Weather weather=new Weather();
     public String getTimeFormot(long Time){
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(Time);
-        return DateFormat.format("HH:mm:ss a", cal).toString();
+        cal.setTimeInMillis(Time*1000);
+        return DateFormat.format("HH:mm a", cal).toString();
     }
 }
